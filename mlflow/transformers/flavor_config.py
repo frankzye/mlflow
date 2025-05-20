@@ -221,7 +221,6 @@ def build_flavor_config_from_local_checkpoint(
     flavor_conf.update(tokenizer_conf)
 
     if processor:
-        components.add(FlavorKey.PROCESSOR)
         flavor_conf.update(_get_component_config(processor, FlavorKey.PROCESSOR))
 
     if feature_extractor:
