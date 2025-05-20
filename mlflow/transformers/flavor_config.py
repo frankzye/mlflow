@@ -221,12 +221,15 @@ def build_flavor_config_from_local_checkpoint(
     flavor_conf.update(tokenizer_conf)
 
     if processor:
+        components.add(FlavorKey.PROCESSOR)
         flavor_conf.update(_get_component_config(processor, FlavorKey.PROCESSOR))
 
     if feature_extractor:
+        components.add(FlavorKey.FEATURE_EXTRACTOR)
         flavor_conf.update(_get_component_config(feature_extractor, FlavorKey.FEATURE_EXTRACTOR))
 
     if image_processor:
+        components.add(FlavorKey.IMAGE_PROCESSOR)
         flavor_conf.update(_get_component_config(image_processor, FlavorKey.IMAGE_PROCESSOR))
         
     flavor_conf[FlavorKey.COMPONENTS] = list(components)
