@@ -275,6 +275,8 @@ def save_model(
     transformers_model,
     path: str,
     processor=None,
+    image_processor=None,
+    feature_extractor=None,
     task: Optional[str] = None,
     torch_dtype: Optional[torch.dtype] = None,
     model_card=None,
@@ -640,7 +642,7 @@ def save_model(
     # Create the flavor configuration
     if isinstance(transformers_model, str):
         flavor_conf = build_flavor_config_from_local_checkpoint(
-            transformers_model, built_pipeline.task, processor, torch_dtype
+            transformers_model, built_pipeline.task, processor, image_processor, feature_extractor, torch_dtype
         )
     else:
         flavor_conf = build_flavor_config(built_pipeline, processor, torch_dtype, save_pretrained)
@@ -795,6 +797,8 @@ def log_model(
     transformers_model,
     artifact_path: str,
     processor=None,
+    image_processor=None,
+    feature_extractor=None,
     task: Optional[str] = None,
     torch_dtype: Optional[torch.dtype] = None,
     model_card=None,
@@ -1027,6 +1031,8 @@ def log_model(
         metadata=metadata,
         transformers_model=transformers_model,
         processor=processor,
+        image_processor=image_processor,
+        feature_extractor=feature_extractor,
         task=task,
         torch_dtype=torch_dtype,
         model_card=model_card,
