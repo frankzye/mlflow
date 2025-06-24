@@ -28,10 +28,10 @@ class VllmServer():
 
         args = []
         if host:
-            args.append(f"--host {shlex.quote(host)}")
+            args.append(f"--host={shlex.quote(host)}")
 
         if port:
-            args.append(f"--port {port}")
+            args.append(f"--port={port}")
 
         if self.vllm_ops:
             args.append(self.vllm_ops)
