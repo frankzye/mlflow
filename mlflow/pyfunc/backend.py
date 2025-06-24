@@ -242,9 +242,11 @@ class PyFuncBackend(FlavorBackend):
         Serve pyfunc model locally.
         """
         local_path = _download_artifact_from_uri(model_uri)
+        
+        function_config = self._config.get("config") if self._config is not None else {}
 
-        if self._config is not None and self._config.get("serving_type") == "vllm":
-            server_implementation = vllm_server.VllmServer(self._config)
+        if function_config.get("serving_type") == "vllm":
+            server_implementation = vllm_server.VllmServer(function_config)
         else:
             server_implementation = mlserver if enable_mlserver else scoring_server
             
