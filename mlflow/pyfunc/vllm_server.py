@@ -22,9 +22,7 @@ class VllmServer():
         model_version: Optional[str] = None,
     ) -> tuple[str, dict[str, str]]:
 
-        local_uri = path_to_local_file_uri(model_uri)[5:]
-
-        cmd = f"vllm serve {local_uri} "
+        cmd = f"vllm serve {model_uri} "
 
         args = []
         if host:
