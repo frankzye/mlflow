@@ -20,7 +20,7 @@ from mlflow.pyfunc import (
     _mlflow_pyfunc_backend_predict,
     mlserver,
     scoring_server,
-    VllmServer,
+    vllm_server,
 )
 from mlflow.tracking.artifact_utils import _download_artifact_from_uri
 from mlflow.utils import env_manager as em
@@ -244,7 +244,7 @@ class PyFuncBackend(FlavorBackend):
         local_path = _download_artifact_from_uri(model_uri)
 
         if self._config is not None and self._config.get("serving_type") == "vllm":
-            server_implementation = VllmServer(self._config)
+            server_implementation = vllm_server.VllmServer(self._config)
         else:
             server_implementation = mlserver if enable_mlserver else scoring_server
             
