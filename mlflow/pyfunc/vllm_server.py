@@ -22,8 +22,12 @@ class VllmServer():
         model_version: Optional[str] = None,
     ) -> tuple[str, dict[str, str]]:
 
-        cmd = f"vllm serve {model_uri} "
-
+        log_model_path = os.path.join(model_uri, "model")
+        if os.path.exists(log_model_path):
+            cmd = f"vllm serve {log_model_path} "
+        else:
+            cmd = f"vllm serve {model_uri} "
+            
         args = []
         if host:
             args.append(f"--host={shlex.quote(host)}")
